@@ -21,6 +21,7 @@ namespace DominioSecretaria.ADO
         private DbSet<Tutor> Tutores { get; set; }
         private DbSet<Seguimiento> Seguimientos { get; set; }
         private DbSet<Cursada> Cursadas { get; set; }
+        private DbSet<Falta> Falta { get; set; }
 
         public void altaAlumno(Alumno alumno)
         {
@@ -102,7 +103,7 @@ namespace DominioSecretaria.ADO
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             //TODO Implementar configuracion externa de configuracion
-            optionsBuilder.UseMySQL("server=localhost;database=escuela;user=usuario;password=password");
+            optionsBuilder.UseMySQL("server=localhost;database=escuela;user=root;password=root");
         }
 
         protected override void OnModelCreating(ModelBuilder mb)

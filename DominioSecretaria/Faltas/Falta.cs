@@ -5,7 +5,8 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace DominioSecretaria.Faltas
 {
-    [Table("Falta")]
+    //[Table("Falta")]
+    [NotMapped]
     public class Falta
     {
         [ForeignKey("idCursada")]
