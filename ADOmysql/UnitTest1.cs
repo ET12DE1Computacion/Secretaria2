@@ -26,6 +26,13 @@ namespace ADOmysql
                 CodigoPostal = "1001",
                 Localidad = caba
             };
+
+            Nacionalidad nacionalidad = new Nacionalidad();
+            nacionalidad.Cadena = "argentina";
+
+            TipoDocumento tipoDocumento = new TipoDocumento();
+            tipoDocumento.Cadena ="DNI";
+
             Persona p1 = new Persona()
             {
                 Nombre = "Carlo",
@@ -33,8 +40,11 @@ namespace ADOmysql
                 Domicilio = d1,
                 Mail = "carlosantanita10@gmail.com",
                 NroDocumento = 456123789,
-                Nacimiento = new DateTime(2004, 12, 02)
+                Nacimiento = new DateTime(2004, 12, 02),
+                Nacionalidad = nacionalidad,
+                TipoDocumento=tipoDocumento
             };
+            
             AdoEntityCoreMySQL ado1 = new AdoEntityCoreMySQL();
             ado1.Database.EnsureCreated();
             ado1.altaPersona(p1);

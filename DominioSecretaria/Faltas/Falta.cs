@@ -9,6 +9,9 @@ namespace DominioSecretaria.Faltas
     [NotMapped]
     public class Falta
     {
+        [Key,Column("idFalta")]
+        public int id { get; set; }
+
         [ForeignKey("idCursada")]
         [Required]
         public Cursada Cursada { get; private set; }
