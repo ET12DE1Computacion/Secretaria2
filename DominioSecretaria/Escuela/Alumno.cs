@@ -2,6 +2,7 @@
 using DominioSecretaria.InfoPersonal;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 
@@ -10,6 +11,8 @@ namespace DominioSecretaria.Escuela
     [Table("Alumno")]
     public class Alumno: EsPersona
     {
+        [Key,Column("legajo")]
+        public int legajo { get; set; }
         [ForeignKey("idCurso")]
         public Curso CursoActual { get; set; }
 

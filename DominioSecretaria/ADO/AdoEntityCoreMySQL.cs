@@ -100,6 +100,25 @@ namespace DominioSecretaria.ADO
                     .ToList();
         }
 
+        public List<Alumno> traerAlumnos()
+        {
+            return Alumnos
+                    .Include(a => a.Persona)
+                    .Include(a => a.CursoActual)
+                    .ToList();
+        }
+        public List<Seguimiento> traerSeguimientos()
+        {
+            return Seguimientos.Include(s => s.Alumno).ToList();
+        }
+        public List<Curso> traerCursos()
+        {
+            return Cursos.ToList();
+        }
+        public List<Cursada> traerCursadas(Alumno alumno)
+        {
+            return Cursadas.Where(c => c.Alumno.legajo == alumno.legajo).ToList();
+        }
         public List<TipoDocumento> traerTipoDocumentos()
         {
             return TipoDocumentos.ToList();
