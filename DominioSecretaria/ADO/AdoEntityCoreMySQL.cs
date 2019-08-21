@@ -100,10 +100,32 @@ namespace DominioSecretaria.ADO
                     .ToList();
         }
 
+        public List<TipoDocumento> traerTipoDocumentos()
+        {
+            return TipoDocumentos.ToList();
+        }
+
+        public List<Nacionalidad> traerNacionalidades()
+        {
+            return Nacionalidades.ToList();
+        }
+        public List<DominioMail> traerDominioMails()
+        {
+            return DominiosMails.ToList();
+        }
+        public List<Localidad> traerLocalidades()
+        {
+            return Localidades.ToList();
+        }
+        public List<Domicilio> traerDomicilios()
+        {
+            return Domicilios.Include(d => d.Localidad).ToList();
+        }
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             //TODO Implementar configuracion externa de configuracion
-            optionsBuilder.UseMySQL("server=localhost;database=escuela;user=root;password=root");
+            optionsBuilder.UseMySQL("server=win2012-01;database=proy_intoxica2;user=vchoque;password=saratoga");
         }
 
         protected override void OnModelCreating(ModelBuilder mb)
