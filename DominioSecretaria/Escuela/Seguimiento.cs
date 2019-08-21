@@ -7,22 +7,17 @@ namespace DominioSecretaria.Escuela
     [Table("SeguimientoAlumno")]
     public class Seguimiento
     {
-        [Key]
-        [Column("idSeguimiento")]
+        [Key, Column("idSeguimiento")]
         public int IdSeguimiento { get; set; }
 
-        [ForeignKey("idAlumno")]
-        [Required]
+        [ForeignKey("idAlumno"), Required]
         public Alumno Alumno { get; set; }
 
-        [Column("observacion")]
-        [StringLength(254)]
-        [Required]
+        [Column("observacion"),StringLength(254),Required]
         public string Observacion { get; set; }
 
 
-        [Column("fecha", TypeName = "Date")]
-        [Required]
+        [Column("fecha", TypeName = "Date"),Required]
         public DateTime Fecha { get; set; }
 
         public Seguimiento() { }

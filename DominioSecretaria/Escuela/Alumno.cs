@@ -100,5 +100,11 @@ namespace DominioSecretaria.Escuela
                 diccionarioFaltas.Add(cursada.CicloLectivo, cursada.Faltas);
             }
         }
+
+        public void agregarSeguimiento(Seguimiento seguimiento)
+        {
+            this.Seguimientos.Add(seguimiento);
+            seguimiento.Alumno = this;
+        }
     }
 }

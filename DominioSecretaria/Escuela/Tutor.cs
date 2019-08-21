@@ -7,12 +7,10 @@ namespace DominioSecretaria.Escuela
     [Table("Tutor")]
     public class Tutor: EsPersona
     {
-        [ForeignKey("idAlumno")]
-        [Required]
+        [ForeignKey("idAlumno"),Required]
         public Alumno Alumno { get; set; }
 
-        [ForeignKey("idTipoTutor")]
-        [Required]
+        [ForeignKey("idTipoTutor"),Required]
         public TipoTutor TipoTutor { get; set; }
         public Tutor() : base() { }
         public Tutor(Persona persona) : base(persona) { }
