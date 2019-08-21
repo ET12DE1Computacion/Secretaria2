@@ -7,8 +7,7 @@ namespace DominioSecretaria.Escuela
     [Table("Curso")]
     public class Curso
     {
-        [Key]
-        [Column("idCurso")]
+        [Key,Column("idCurso")]
         public int IdCurso { get; set; }
 
         [Column("division")]
