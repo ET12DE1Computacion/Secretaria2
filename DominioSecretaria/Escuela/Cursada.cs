@@ -1,8 +1,7 @@
 ﻿using System;
-using DominioSecretaria.Faltas;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Collections.Generic;
 
 namespace DominioSecretaria.Escuela
 {
@@ -12,7 +11,7 @@ namespace DominioSecretaria.Escuela
         [Key,Column("idCursada")]
         public int IdCursada { get; set; }
 
-        [ForeignKey("idAlumno"),Required]
+        [ForeignKey("legajo"),Required]
         public Alumno Alumno { get; set; }
 
         [ForeignKey("idCurso"),Required]

@@ -10,9 +10,10 @@ namespace DominioSecretaria.Escuela
 {
     [Table("Alumno")]
     public class Alumno: EsPersona
-    {
-        [Key,Column("legajo")]
+    {        
+        [Key, Column("legajo")]
         public int legajo { get; set; }
+
         [ForeignKey("idCurso")]
         public Curso CursoActual { get; set; }
 

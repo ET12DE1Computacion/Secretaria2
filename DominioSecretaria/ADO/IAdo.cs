@@ -21,5 +21,14 @@ namespace DominioSecretaria.ADO
         void altaTutor(Tutor tutor);
         void altaSeguimiento(Seguimiento seguimiento);
         void altaDominioMail(DominioMail dominioMail);
+
+        List<Localidad> traerLocalidades();
+        List<DominioMail> traerDominioMails();
+        List<Nacionalidad> traerNacionalidades();
+        List<Seguimiento> traerSeguimientos();
+        List<TipoDocumento> traerTipoDocumentos();
+        List<Alumno> traerAlumnos();
+        List<Curso> traerCursos();
+        List<Domicilio> traerDomicilios();
     }
 }
