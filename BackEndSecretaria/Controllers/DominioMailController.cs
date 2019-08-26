@@ -22,16 +22,19 @@ namespace BackEndSecretaria.Controllers
         }
 
         // GET: api/DominioMail/5
-        [HttpGet("{id}", Name = "Get")]
-        public string Get(int id)
+        [HttpGet("{id}")]
+        public DominioMail Get(int id)
         {
-            return "value";
+            AdoEntityCoreMySQL ado = new AdoEntityCoreMySQL();
+            return ado.traerDominioMailById(id);
         }
 
         // POST: api/DominioMail
         [HttpPost]
-        public void Post([FromBody] string value)
+        public void Post([FromBody] DominioMail dominioMail)
         {
+            AdoEntityCoreMySQL ado = new AdoEntityCoreMySQL();
+            ado.altaDominioMail(dominioMail);
         }
 
         // PUT: api/DominioMail/5

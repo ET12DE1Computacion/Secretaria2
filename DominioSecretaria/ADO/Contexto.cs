@@ -1,4 +1,5 @@
-﻿using DominioSecretaria.Escuela;
+﻿using System;
+using DominioSecretaria.Escuela;
 using DominioSecretaria.Faltas;
 using DominioSecretaria.InfoPersonal;
 using Microsoft.EntityFrameworkCore;
@@ -16,6 +17,7 @@ namespace DominioSecretaria.ADO
         internal DbSet<Nacionalidad> Nacionalidades { get; set; }
         internal DbSet<DominioMail> DominiosMails { get; set; }
         internal DbSet<TipoTutor> TipoTutores { get; set; }
+        
         //internal DbSet<Tutor> Tutores { get; set; }
         internal DbSet<Seguimiento> Seguimientos { get; set; }
         private DbSet<Cursada> Cursadas { get; set; }
@@ -24,9 +26,8 @@ namespace DominioSecretaria.ADO
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             //TODO Implementar configuracion externa de configuracion
-            
-            optionsBuilder.UseMySQL("server=win2012-01;database=proy_intoxica2;user=vchoque;password=saratoga");
-            //optionsBuilder.UseMySQL("server=localhost;database=secretaria;user=root;password=root");
+            //optionsBuilder.UseMySQL("server=win2012-01;database=proy_intoxica2;user=vchoque;password=saratoga");
+            optionsBuilder.UseMySQL("server=localhost;database=proy_intoxica2;user=root;password=telesca1234");
         }
 
         protected override void OnModelCreating(ModelBuilder mb)

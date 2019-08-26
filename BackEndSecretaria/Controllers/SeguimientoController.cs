@@ -22,16 +22,19 @@ namespace BackEndSecretaria.Controllers
         }
 
         // GET: api/Seguimiento/5
-        [HttpGet("{id}", Name = "Get")]
-        public string Get(int id)
+        [HttpGet("{id}")]
+        public Seguimiento Get(int id)
         {
-            return "value";
+            AdoEntityCoreMySQL ado = new AdoEntityCoreMySQL();
+            return ado.traerSeguimientoById(id);
         }
 
         // POST: api/Seguimiento
         [HttpPost]
-        public void Post([FromBody] string value)
+        public void Post([FromBody] Seguimiento seguimiento)
         {
+            AdoEntityCoreMySQL ado = new AdoEntityCoreMySQL();
+            ado.altaSeguimiento(seguimiento);
         }
 
         // PUT: api/Seguimiento/5

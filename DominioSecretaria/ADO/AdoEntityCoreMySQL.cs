@@ -1,6 +1,7 @@
 ﻿using DominioSecretaria.Escuela;
 using DominioSecretaria.InfoPersonal;
 using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -9,6 +10,12 @@ namespace DominioSecretaria.ADO
     public class AdoEntityCoreMySQL : IAdo
     {
         public Contexto Contexto { get; set; }
+
+        public AdoEntityCoreMySQL()
+        {
+            Contexto = new Contexto();
+        }
+
         public void altaAlumno(Alumno alumno)
         {
             Contexto.Alumnos.Add(alumno);
@@ -31,6 +38,60 @@ namespace DominioSecretaria.ADO
         {
             Contexto.DominiosMails.Add(dominioMail);
             Contexto.SaveChanges();
+        }
+
+        public Alumno traerAlumnoById(int id)
+        {
+            return Contexto.Alumnos.FirstOrDefault(x => x.legajo == id);
+        }
+        public Curso traerCursoById(int id)
+        {
+            return Contexto.Cursos.FirstOrDefault(x => x.IdCurso == id);
+        }
+
+        public Domicilio traerDomicilioById(int id)
+        {
+            return Contexto.Domicilios.FirstOrDefault(x => x.IdDomicilio == id);
+        }
+
+        public DominioMail traerDominioMailById(int id)
+        {
+            return Contexto.DominiosMails.FirstOrDefault(x => x.Id == id);
+        }
+
+        public void bajaNacionalidad(int id)
+        {
+            var nacionalidad = Contexto.Nacionalidades.FirstOrDefault(x => x.Id == id);
+            if (nacionalidad != null)
+            {
+                Contexto.Nacionalidades.Remove(nacionalidad);
+                Contexto.SaveChanges();
+            }
+        }
+
+        public Localidad traerLocalidadById(byte id)
+        {
+            return Contexto.Localidades.FirstOrDefault(x => x.Id == id);
+        }
+
+        public Seguimiento traerSeguimientoById(int id)
+        {
+            return Contexto.Seguimientos.FirstOrDefault(x => x.IdSeguimiento == id);
+        }
+
+        public TipoDocumento traerTipoDocumentoById(int id)
+        {
+            return Contexto.TipoDocumentos.FirstOrDefault(x => x.Id == id);
+        }
+
+        public Persona traerPersonasById(int id)
+        {
+            return Contexto.Personas.FirstOrDefault(x => x.IdPersona == id);
+        }
+
+        public Nacionalidad traerNacionalidadById(int id)
+        {
+            return Contexto.Nacionalidades.FirstOrDefault(x => x.Id == id);
         }
 
         public void altaLocalidad(Localidad localidad)

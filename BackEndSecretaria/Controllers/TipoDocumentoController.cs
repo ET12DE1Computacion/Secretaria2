@@ -23,16 +23,19 @@ namespace BackEndSecretaria.Controllers
         }
 
         // GET: api/TipoDocumento/5
-        [HttpGet("{id}", Name = "Get")]
-        public string Get(int id)
+        [HttpGet("{id}")]
+        public TipoDocumento Get(int id)
         {
-            return "value";
+            AdoEntityCoreMySQL ado = new AdoEntityCoreMySQL();
+            return ado.traerTipoDocumentoById(id);
         }
 
         // POST: api/TipoDocumento
         [HttpPost]
-        public void Post([FromBody] string value)
+        public void Post([FromBody] TipoDocumento tipoDocumento)
         {
+            AdoEntityCoreMySQL ado = new AdoEntityCoreMySQL();
+            ado.altaTipoDocumento(tipoDocumento);
         }
 
         // PUT: api/TipoDocumento/5

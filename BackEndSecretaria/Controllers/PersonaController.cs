@@ -22,16 +22,19 @@ namespace BackEndSecretaria.Controllers
         }
 
         // GET: api/Persona/5
-        [HttpGet("{id}", Name = "Get")]
-        public string Get(int id)
+        [HttpGet("{id}")]
+        public Persona Get(int id)
         {
-            return "value";
+            AdoEntityCoreMySQL ado = new AdoEntityCoreMySQL();
+            return ado.traerPersonasById(id); 
         }
 
         // POST: api/Persona
         [HttpPost]
-        public void Post([FromBody] string value)
+        public void Post([FromBody] Persona persona)
         {
+            AdoEntityCoreMySQL ado = new AdoEntityCoreMySQL();
+            ado.altaPersona(persona);
         }
 
         // PUT: api/Persona/5

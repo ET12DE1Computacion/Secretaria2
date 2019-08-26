@@ -22,16 +22,19 @@ namespace BackEndSecretaria.Controllers
         }
 
         // GET: api/Nacionalidad/5
-        [HttpGet("{id}", Name = "Get")]
-        public string Get(int id)
+        [HttpGet("{id}")]
+        public Nacionalidad Get(int id)
         {
-            return "value";
+            AdoEntityCoreMySQL ado = new AdoEntityCoreMySQL();
+            return ado.traerNacionalidadById(id);
         }
 
         // POST: api/Nacionalidad
         [HttpPost]
-        public void Post([FromBody] string value)
+        public void Post([FromBody] Nacionalidad nacionalidad)
         {
+            AdoEntityCoreMySQL ado = new AdoEntityCoreMySQL();
+            ado.altaNacionalidad(nacionalidad);
         }
 
         // PUT: api/Nacionalidad/5
@@ -44,6 +47,8 @@ namespace BackEndSecretaria.Controllers
         [HttpDelete("{id}")]
         public void Delete(int id)
         {
+            AdoEntityCoreMySQL ado = new AdoEntityCoreMySQL();
+            ado.bajaNacionalidad(id);
         }
     }
 }

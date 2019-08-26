@@ -22,16 +22,19 @@ namespace BackEndSecretaria.Controllers
         }
 
         // GET: api/Localidad/5
-        [HttpGet("{id}", Name = "Get")]
-        public string Get(int id)
+        [HttpGet("{id}")]
+        public Localidad Get(byte id)
         {
-            return "value";
+            AdoEntityCoreMySQL ado = new AdoEntityCoreMySQL();
+            return ado.traerLocalidadById(id);
         }
 
         // POST: api/Localidad
         [HttpPost]
-        public void Post([FromBody] string value)
+        public void Post([FromBody] Localidad localidad)
         {
+            AdoEntityCoreMySQL ado = new AdoEntityCoreMySQL();
+            ado.altaLocalidad(localidad);
         }
 
         // PUT: api/Localidad/5

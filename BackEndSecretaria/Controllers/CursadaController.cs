@@ -24,7 +24,7 @@ namespace BackEndSecretaria.Controllers
         }
 
         // GET: api/Cursada/5
-        [HttpGet("{id}", Name = "Get")]
+        [HttpGet("{id}")]
         public string Get(int id)
         {
             return "value";
@@ -32,8 +32,10 @@ namespace BackEndSecretaria.Controllers
 
         // POST: api/Cursada
         [HttpPost]
-        public void Post([FromBody] string value)
+        public void Post([FromBody] Cursada cursada)
         {
+            AdoEntityCoreMySQL ado = new AdoEntityCoreMySQL();
+            //ado.altaCursada(cursada);
         }
 
         // PUT: api/Cursada/5
