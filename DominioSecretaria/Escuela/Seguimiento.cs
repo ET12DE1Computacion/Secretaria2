@@ -10,7 +10,7 @@ namespace DominioSecretaria.Escuela
         [Key, Column("idSeguimiento")]
         public int IdSeguimiento { get; set; }
 
-        [ForeignKey("idAlumno"), Required]
+        [ForeignKey("legajo"), Required]
         public Alumno Alumno { get; set; }
 
         [Column("observacion"),StringLength(254),Required]

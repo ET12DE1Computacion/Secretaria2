@@ -4,6 +4,7 @@ using DominioSecretaria.Escuela;
 using System;
 using DominioSecretaria.ADO;
 
+
 namespace ADOmysql
 {
     [TestClass]
@@ -12,7 +13,6 @@ namespace ADOmysql
         [TestMethod]
         public void TestMethod1()
         {
-
             Localidad caba = new Localidad()
             {
                 Cadena = "CABA"
@@ -45,8 +45,9 @@ namespace ADOmysql
                 TipoDocumento=tipoDocumento
             };
             
-            AdoEntityCoreMySQL ado1 = new AdoEntityCoreMySQL();
-            ado1.Database.EnsureCreated();
+            var ado1 = new AdoEntityCoreMySQL();
+            ado1.Contexto = new Contexto();
+            ado1.Contexto.Database.EnsureCreated();
             ado1.altaPersona(p1);
         }
     }
