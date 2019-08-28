@@ -49,6 +49,10 @@ namespace ADOmysql
             ado1.Contexto = new Contexto();
             ado1.Contexto.Database.EnsureCreated();
             ado1.altaPersona(p1);
+            ado1.Contexto = new Contexto();
+            var persona = ado1.traerPersonas()[0];
+            Assert.IsNotNull(persona.Domicilio.Localidad);
+            Assert.AreEqual("CABA", persona.Domicilio.Localidad.Cadena);
         }
     }
 }

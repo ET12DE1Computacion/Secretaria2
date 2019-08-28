@@ -27,7 +27,7 @@ namespace DominioSecretaria.ADO
         {
             //TODO Implementar configuracion externa de configuracion
             //optionsBuilder.UseMySQL("server=win2012-01;database=proy_intoxica2;user=vchoque;password=saratoga");
-            optionsBuilder.UseMySQL("server=localhost;database=proy_intoxica2;user=root;password=telesca1234");
+            optionsBuilder.UseMySQL("server=localhost;database=proy_intoxica2;user=root;password=root");
         }
 
         protected override void OnModelCreating(ModelBuilder mb)
@@ -36,15 +36,16 @@ namespace DominioSecretaria.ADO
             mb.Entity<Localidad>(entidad =>
             {
                 entidad.HasIndex(l => l.Cadena)
-                        .IsUnique();
+                       .IsUnique();
 
                 entidad.Property(l => l.Id)
-                        .HasColumnName("idLocalidad");
+                       .HasColumnName("idLocalidad");
 
                 entidad.Property(l => l.Cadena)
                         .HasColumnName("localidad")
                         .HasMaxLength(60);
             });
+            
 
             mb.Entity<TipoDocumento>(entidad =>
             {
@@ -110,6 +111,43 @@ namespace DominioSecretaria.ADO
                         .HasColumnName("tipoFalta")
                         .HasMaxLength(30);
             });
+
+            mb.Entity<Domicilio>().ToTable("Domicilio");
+            mb.Entity<Domicilio>()
+                .HasKey(d => d.IdDomicilio);
+            mb.Entity<Domicilio>()
+                .Property<byte>("idLocalidad");
+            mb.Entity<Domicilio>()
+                .HasOne(d => d.Localidad)
+                .WithMany()
+                .HasForeignKey("idLocalidad");
+            mb.Entity<Domicilio>(entidad =>
+            {
+                entidad.Property(d => d.IdDomicilio)
+                .HasColumnName("idDomicilio");               
+                
+                entidad.Property(d => d.Calle)
+                .HasColumnName("Calle")
+                .HasMaxLength(45);
+
+                entidad.Property(d => d.Altura)
+                .HasColumnName("Altura");
+
+                entidad.Property(d => d.Piso)
+                .HasColumnName("Piso");
+
+                entidad.Property(d => d.Departamento)
+                .HasColumnName("Departamento")
+                .HasMaxLength(3);
+
+                entidad.Property(d => d.CodigoPostal)
+                .HasColumnName("CodigoPostal")
+                .HasMaxLength(8);
+
+                entidad.Property(d => d.observacionDomicilio)
+                .HasColumnName("ObservacionDomicilio")
+                .HasMaxLength(60);
+            });            
 
             base.OnModelCreating(mb);
         }
