@@ -10,10 +10,13 @@ namespace DominioSecretaria.ADO.ContextConfiguracion
         {
             mb.ToTable("Localidad");
 
+            mb.HasKey(l => l.Id);
             mb.HasIndex(l => l.Cadena).IsUnique();
-                        
+
+            mb.Property(l => l.Id)
+                .HasColumnName("idLocalidad");
             mb.Property(l => l.Cadena)
-                .HasColumnName("Localidad")
+                .HasColumnName("localidad")
                 .HasMaxLength(45);                
         }
     }

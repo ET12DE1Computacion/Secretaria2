@@ -4,48 +4,23 @@ using System.ComponentModel.DataAnnotations;
 
 namespace DominioSecretaria.InfoPersonal
 {
-    [Table("Persona")]
     public class Persona
     {
-        [Column("idPersona")]
-        [Key]
+
         public int IdPersona { get; set; }
-
-        [Column("nombre")]
-        [StringLength(60)]
-        [Required]
         public string Nombre { get; set; }
-
-        [Column("apellido")]
-        [StringLength(60)]
-        [Required]
         public string Apellido { get; set; }
-
-        [ForeignKey("idDomicilio")]
-        [Required]
-        public virtual Domicilio Domicilio { get; set; }
-
-        [Column("mail")]
-        [StringLength(60)]
-        public string Mail { get; set; }
-
-        [ForeignKey("idDominioMail")]
+        public virtual Domicilio Domicilio { get; set; }   
+        public string Mail { get; set; } 
         public virtual DominioMail DominioMail { get; set; }
-
-        [ForeignKey("idNacionalidad")]
-        [Required]
         public virtual Nacionalidad Nacionalidad { get; set; }
-
-        [ForeignKey("idTipoDocumento")]
-        [Required]
         public virtual TipoDocumento TipoDocumento { get; set; }
-
-        [Column("nroDocumento")]
         public int NroDocumento { get; set; }
 
-        [Column("nacimiento", TypeName = "Date")]
-        [Required]
         public DateTime Nacimiento { get; set; }
+
+        public long? Telefono1 { get; set; }
+        public long? Telefono2 { get; set; }
         public Persona() { }
 
         [NotMapped]

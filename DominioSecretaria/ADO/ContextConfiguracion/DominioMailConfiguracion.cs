@@ -11,12 +11,15 @@ namespace DominioSecretaria.ADO.ContextConfiguracion
     {
         public void Configure(EntityTypeBuilder<DominioMail> mb)
         {
-            mb.ToTable("DomnioMail");
+            mb.ToTable("DominioMail");
 
+            mb.HasKey(l => l.Id);
             mb.HasIndex(l => l.Cadena).IsUnique();
 
+            mb.Property(l => l.Id)
+                .HasColumnName("idDominioMail");
             mb.Property(l => l.Cadena)
-                .HasColumnName("DominioMail")
+                .HasColumnName("dominioMail")
                 .HasMaxLength(45);
         }
     }

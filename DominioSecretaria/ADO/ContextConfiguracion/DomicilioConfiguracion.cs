@@ -15,30 +15,33 @@ namespace DominioSecretaria.ADO.ContextConfiguracion
             mb.Property<byte>("idLocalidad");
             mb.HasOne(d => d.Localidad)
               .WithMany()
-              .HasForeignKey("idLocalidad");
+              .HasForeignKey("idLocalidad")
+              .IsRequired();
+
             mb.Property(d => d.IdDomicilio)
                 .HasColumnName("idDomicilio");
 
             mb.Property(d => d.Calle)
                     .HasColumnName("Calle")
-                    .HasMaxLength(45);
+                    .HasMaxLength(45)
+                    .IsRequired();
 
             mb.Property(d => d.Altura)
-                    .HasColumnName("Altura");
+                    .HasColumnName("altura");
 
             mb.Property(d => d.Piso)
-                    .HasColumnName("Piso");
+                    .HasColumnName("piso");
 
             mb.Property(d => d.Departamento)
-                    .HasColumnName("Departamento")
+                    .HasColumnName("departamento")
                     .HasMaxLength(3);
 
             mb.Property(d => d.CodigoPostal)
-                    .HasColumnName("CodigoPostal")
+                    .HasColumnName("codigoPostal")
                     .HasMaxLength(8);
 
             mb.Property(d => d.observacionDomicilio)
-                    .HasColumnName("ObservacionDomicilio")
+                    .HasColumnName("observacionDomicilio")
                     .HasMaxLength(60);
         }
     }

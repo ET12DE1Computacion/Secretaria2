@@ -68,7 +68,9 @@ namespace DominioSecretaria.ADO
 
             mb.ApplyConfiguration<DominioMail>(new DominioMailConfiguracion());
 
-            mb.ApplyConfiguration<Domicilio>(new DomicilioConfiguracion());       
+            mb.ApplyConfiguration<Domicilio>(new DomicilioConfiguracion());
+
+            mb.ApplyConfiguration<Persona>(new PersonaConfiguracion());
 
             base.OnModelCreating(mb);
         }

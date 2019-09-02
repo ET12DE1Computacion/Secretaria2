@@ -38,7 +38,8 @@ namespace ADOmysql
                 Nombre = "Carlo",
                 Apellido = "Santana",
                 Domicilio = d1,
-                Mail = "carlosantanita10@gmail.com",
+                Mail = null,
+                DominioMail = null,
                 NroDocumento = 456123789,
                 Nacimiento = new DateTime(2004, 12, 02),
                 Nacionalidad = nacionalidad,
@@ -47,6 +48,7 @@ namespace ADOmysql
             
             var ado1 = new AdoEntityCoreMySQL();
             ado1.Contexto = new Contexto();
+            ado1.Contexto.Database.EnsureDeleted();
             ado1.Contexto.Database.EnsureCreated();
             ado1.altaPersona(p1);
             ado1.Contexto = new Contexto();

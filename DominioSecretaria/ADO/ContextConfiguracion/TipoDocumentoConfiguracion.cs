@@ -10,10 +10,13 @@ namespace DominioSecretaria.ADO.ContextConfiguracion
         {
             mb.ToTable("TipoDocumento");
 
+            mb.HasKey(l => l.Id);
             mb.HasIndex(l => l.Cadena).IsUnique();
 
+            mb.Property(l => l.Id)
+                .HasColumnName("idTipoDocumento");
             mb.Property(l => l.Cadena)
-                .HasColumnName("TipoDocumento")
+                .HasColumnName("tipoDocumento")
                 .HasMaxLength(45);
         }
     }
