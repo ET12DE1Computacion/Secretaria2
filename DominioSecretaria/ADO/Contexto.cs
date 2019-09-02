@@ -27,52 +27,12 @@ namespace DominioSecretaria.ADO
         {
             //TODO Implementar configuracion externa de configuracion
             //optionsBuilder.UseMySQL("server=win2012-01;database=proy_intoxica2;user=vchoque;password=saratoga");
-            optionsBuilder.UseMySQL("server=localhost;database=proy_intoxica2;user=root;password=12Lujho");
+            optionsBuilder.UseMySQL("server=localhost;database=proy_intoxica2;user=root;password=root");
         }
 
         protected override void OnModelCreating(ModelBuilder mb)
         {
-                      
-            mb.Entity<Localidad>(entidad =>
-            {
-                entidad.HasIndex(l => l.Cadena)
-                       .IsUnique();
-
-                entidad.Property(l => l.Id)
-                       .HasColumnName("idLocalidad");
-
-                entidad.Property(l => l.Cadena)
-                        .HasColumnName("localidad")
-                        .HasMaxLength(60);
-            });
-            
-
-            mb.Entity<TipoDocumento>(entidad =>
-            {
-                entidad.HasIndex(l => l.Cadena)
-                        .IsUnique();
-
-                entidad.Property(l => l.Id)
-                        .HasColumnName("idTipoDocumento");
-
-                entidad.Property(l => l.Cadena)
-                        .HasColumnName("tipoDocumento")
-                        .HasMaxLength(35);
-            });
-
-            mb.Entity<Nacionalidad>(entidad =>
-            {
-                entidad.HasIndex(l => l.Cadena)
-                        .IsUnique();
-
-                entidad.Property(l => l.Id)
-                        .HasColumnName("idNacionalidad");
-
-                entidad.Property(l => l.Cadena)
-                        .HasColumnName("nacionalidad")
-                        .HasMaxLength(25);
-            });
-
+             
             mb.Entity<TipoTutor>(entidad =>
             {
                 entidad.HasIndex(l => l.Cadena)
@@ -86,18 +46,7 @@ namespace DominioSecretaria.ADO
                         .HasMaxLength(15);
             });
 
-            mb.Entity<DominioMail>(entidad =>
-            {
-                entidad.HasIndex(l => l.Cadena)
-                        .IsUnique();
 
-                entidad.Property(l => l.Id)
-                        .HasColumnName("idDominioMail");
-
-                entidad.Property(l => l.Cadena)
-                        .HasColumnName("dominioMail")
-                        .HasMaxLength(35);
-            });
 
             mb.Entity<TipoFalta>(entidad =>
             {
@@ -111,6 +60,13 @@ namespace DominioSecretaria.ADO
                         .HasColumnName("tipoFalta")
                         .HasMaxLength(30);
             });
+            mb.ApplyConfiguration<Localidad>(new LocalidadConfiguracion());
+
+            mb.ApplyConfiguration<Nacionalidad>(new NacionalidadConfiguracion());
+
+            mb.ApplyConfiguration<TipoDocumento>(new TipoDocumentoConfiguracion());
+
+            mb.ApplyConfiguration<DominioMail>(new DominioMailConfiguracion());
 
             mb.ApplyConfiguration<Domicilio>(new DomicilioConfiguracion());       
 
