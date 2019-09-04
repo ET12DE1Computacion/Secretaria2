@@ -12,7 +12,6 @@ namespace DominioSecretaria.InfoPersonal
         public string Apellido { get; set; }
         public virtual Domicilio Domicilio { get; set; }   
         public string Mail { get; set; } 
-        public virtual DominioMail DominioMail { get; set; }
         public virtual Nacionalidad Nacionalidad { get; set; }
         public virtual TipoDocumento TipoDocumento { get; set; }
         public int NroDocumento { get; set; }
@@ -37,9 +36,5 @@ namespace DominioSecretaria.InfoPersonal
                 return edad;
             }
         }
-
-        [NotMapped]
-        public string MailFull =>
-            (Mail != null) ? Mail + '@' + DominioMail.Cadena : null;
     }
 }

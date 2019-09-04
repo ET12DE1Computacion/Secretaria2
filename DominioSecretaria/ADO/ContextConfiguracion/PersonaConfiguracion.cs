@@ -27,13 +27,7 @@ namespace DominioSecretaria.ADO.ContextConfiguracion
                 .HasForeignKey("idNacionalidad")
                 .IsRequired();
 
-            mb.Property<byte>("idDominioMail");
-            mb.HasOne(d => d.DominioMail)
-                .WithMany()
-                .HasForeignKey("idDominioMail")
-                .IsRequired(false);
-
-            mb.Property<byte>("idDomicilio");
+            mb.Property<int>("idDomicilio");
             mb.HasOne(d => d.Domicilio)
                 .WithMany()
                 .HasForeignKey("idDomicilio")
@@ -69,7 +63,7 @@ namespace DominioSecretaria.ADO.ContextConfiguracion
 
             mb.Property(d => d.Mail)
                 .HasColumnName("mail")
-                .HasMaxLength(45);
+                .HasMaxLength(60);
         }
     }
 }

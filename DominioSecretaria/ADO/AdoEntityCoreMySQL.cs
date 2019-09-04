@@ -34,12 +34,6 @@ namespace DominioSecretaria.ADO
             Contexto.SaveChanges();
         }
 
-        public void altaDominioMail(DominioMail dominioMail)
-        {
-            Contexto.DominiosMails.Add(dominioMail);
-            Contexto.SaveChanges();
-        }
-
         public Alumno traerAlumnoById(int id)
         {
             return Contexto.Alumnos.FirstOrDefault(x => x.legajo == id);
@@ -52,11 +46,6 @@ namespace DominioSecretaria.ADO
         public Domicilio traerDomicilioById(int id)
         {
             return Contexto.Domicilios.FirstOrDefault(x => x.IdDomicilio == id);
-        }
-
-        public DominioMail traerDominioMailById(int id)
-        {
-            return Contexto.DominiosMails.FirstOrDefault(x => x.Id == id);
         }
 
         public void bajaNacionalidad(int id)
@@ -142,7 +131,6 @@ namespace DominioSecretaria.ADO
         public List<Persona> traerPersonas()
         {
             return Contexto.Personas
-                    .Include(p => p.DominioMail)
                     .Include(p => p.TipoDocumento)
                     .Include(p => p.Nacionalidad)
                     .Include(p => p.Domicilio.Localidad)
@@ -150,7 +138,6 @@ namespace DominioSecretaria.ADO
                     .ToList();
         }
         public List<Nacionalidad> traerNacionalidades() => Contexto.Nacionalidades.ToList();
-        public List<DominioMail> traerDominioMails() => Contexto.DominiosMails.ToList();
         public List<Localidad> traerLocalidades() => Contexto.Localidades.ToList();
 
         public List<Seguimiento> traerSeguimientos() => Contexto.Seguimientos.ToList();
