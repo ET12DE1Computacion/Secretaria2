@@ -1,9 +1,7 @@
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using DominioSecretaria.InfoPersonal;
-using DominioSecretaria.Escuela;
-using System;
 using DominioSecretaria.ADO;
-
+using DominioSecretaria.InfoPersonal;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System;
 
 namespace ADOmysql
 {

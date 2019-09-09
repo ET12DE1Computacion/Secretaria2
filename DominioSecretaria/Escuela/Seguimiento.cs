@@ -4,20 +4,11 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace DominioSecretaria.Escuela
 {
-    [Table("SeguimientoAlumno")]
     public class Seguimiento
     {
-        [Key, Column("idSeguimiento")]
         public int IdSeguimiento { get; set; }
-
-        [ForeignKey("legajo"), Required]
         public Alumno Alumno { get; set; }
-
-        [Column("observacion"),StringLength(254),Required]
         public string Observacion { get; set; }
-
-
-        [Column("fecha", TypeName = "Date"),Required]
         public DateTime Fecha { get; set; }
 
         public Seguimiento() { }

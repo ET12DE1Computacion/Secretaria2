@@ -70,6 +70,13 @@ namespace DominioSecretaria.ADO
 
             mb.ApplyConfiguration<Persona>(new PersonaConfiguracion());
 
+            mb.ApplyConfiguration<Cursada>(new CursadaConfiguracion());
+
+            mb.ApplyConfiguration<Seguimiento>(new SeguimientoConfiguracion());
+
+            mb.ApplyConfiguration<TipoTutor>(new TipoTutorConfiguracion());
+
+            mb.ApplyConfiguration<Tutor>(new TutorConfiguracion());
             base.OnModelCreating(mb);
         }
     }

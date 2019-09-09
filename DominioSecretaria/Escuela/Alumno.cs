@@ -8,19 +8,14 @@ using System.Linq;
 
 namespace DominioSecretaria.Escuela
 {
-    [Table("Alumno")]
     public class Alumno: EsPersona
     {        
-        [Key, Column("legajo")]
         public int legajo { get; set; }
 
-        [ForeignKey("idCurso")]
         public Curso CursoActual { get; set; }
 
-        [Column("libro")]
         public byte Libro { get; set; }
 
-        [Column("folio")]
         public byte Folio { get; set; }        
 
         public List<Seguimiento> Seguimientos { get; set; }

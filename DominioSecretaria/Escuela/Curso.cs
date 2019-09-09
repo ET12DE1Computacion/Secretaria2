@@ -4,16 +4,12 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace DominioSecretaria.Escuela
 {
-    [Table("Curso")]
     public class Curso
     {
-        [Key,Column("idCurso")]
         public int IdCurso { get; set; }
 
-        [Column("division")]
         public byte Division { get; set; }
 
-        [Column("anio")]
         public byte Anio { get; set; }
 
         public List<Alumno> Alumnos { get; set; }
