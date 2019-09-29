@@ -16,6 +16,11 @@ namespace DominioSecretaria.ADO
             Contexto = new Contexto();
         }
 
+        public AdoEntityCoreMySQL(Contexto contexto)
+        {
+            this.Contexto = contexto;
+        }
+
         public void altaAlumno(Alumno alumno)
         {
             Contexto.Alumnos.Add(alumno);
@@ -144,10 +149,33 @@ namespace DominioSecretaria.ADO
 
         public List<TipoDocumento> traerTipoDocumentos() => Contexto.TipoDocumentos.ToList();
 
-        public List<Alumno> traerAlumnos() => Contexto.Alumnos.ToList();
+        public List<Alumno> traerAlumnosSinDetalle()
+        {
+            return Contexto.Alumnos.Include(x => x.Persona)
+                .Include(x => x.CursoActual).ToList();
+        }
+
+        public List<Alumno> traerAlumnosConDetalle()
+        {
+            return Contexto.Alumnos
+                .Include(x=>x.CursoActual)
+                .Include(x => x.Persona)
+                    .ThenInclude(x => x.TipoDocumento)
+                .Include(x=>x.Persona)
+                    .ThenInclude(x=>x.Nacionalidad)
+                .Include(x => x.Persona)
+                    .ThenInclude(x => x.Domicilio)
+                        .ThenInclude(x => x.Localidad)
+                .ToList();
+                
+        }
 
         public List<Curso> traerCursos() => Contexto.Cursos.ToList();
 
         public List<Domicilio> traerDomicilios() => Contexto.Domicilios.ToList();
+        public List<Cursada> traerCursada()
+        {
+            return Contexto.Cursadas.Include(x => x.Curso).ToList();          
+        }
     }
 }

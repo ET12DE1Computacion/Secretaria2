@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using BackEndSecretaria.ViewModel;
 using DominioSecretaria.ADO;
 using DominioSecretaria.InfoPersonal;
 using Microsoft.AspNetCore.Http;
@@ -9,46 +10,58 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace BackEndSecretaria.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/[controller]/[action]")]
     [ApiController]
     public class NacionalidadController : ControllerBase
     {
+        private readonly Contexto contexto;
+
+        public NacionalidadController(Contexto contexto)
+        {
+            this.contexto = contexto;
+        }
+
         // GET: api/Nacionalidad
         [HttpGet]
-        public IEnumerable<Nacionalidad> Get()
+        public IEnumerable<NacionalidadViewModel> TraerTodos()
         {
-            AdoEntityCoreMySQL ado = new AdoEntityCoreMySQL();
-            return ado.traerNacionalidades();
+            AdoEntityCoreMySQL ado = new AdoEntityCoreMySQL(contexto);
+
+            var NacionalidadesViewModel = ado.traerNacionalidades().Select(x => new NacionalidadViewModel { IdNacionalidad = x.Id, Nacionalidad = x.Cadena });
+            
+            return NacionalidadesViewModel;
         }
 
         // GET: api/Nacionalidad/5
         [HttpGet("{id}")]
-        public Nacionalidad Get(int id)
+        public NacionalidadViewModel TraerPorId(int id)
         {
-            AdoEntityCoreMySQL ado = new AdoEntityCoreMySQL();
-            return ado.traerNacionalidadById(id);
+            AdoEntityCoreMySQL ado = new AdoEntityCoreMySQL(contexto);
+     
+            var nacionalidad = ado.traerNacionalidadById(id);
+
+            var nacionalidadViewModel = new NacionalidadViewModel 
+            {
+                IdNacionalidad = nacionalidad.Id,
+                Nacionalidad = nacionalidad.Cadena
+            };
+
+            return nacionalidadViewModel;
         }
 
         // POST: api/Nacionalidad
         [HttpPost]
-        public void Post([FromBody] Nacionalidad nacionalidad)
+        public void Crear([FromBody] NacionalidadViewModel nacionalidadViewModel)
         {
-            AdoEntityCoreMySQL ado = new AdoEntityCoreMySQL();
+            AdoEntityCoreMySQL ado = new AdoEntityCoreMySQL(contexto);
+            
+            var nacionalidad = new Nacionalidad
+            {
+                Id = nacionalidadViewModel.IdNacionalidad,
+                Cadena=nacionalidadViewModel.Nacionalidad
+            };
+            
             ado.altaNacionalidad(nacionalidad);
-        }
-
-        // PUT: api/Nacionalidad/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
-        {
-        }
-
-        // DELETE: api/ApiWithActions/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
-            AdoEntityCoreMySQL ado = new AdoEntityCoreMySQL();
-            ado.bajaNacionalidad(id);
         }
     }
 }

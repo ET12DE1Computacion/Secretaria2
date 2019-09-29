@@ -1,6 +1,8 @@
-﻿using Microsoft.AspNetCore.Builder;
+﻿using DominioSecretaria.ADO;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Swashbuckle.AspNetCore.Swagger;
@@ -21,6 +23,13 @@ namespace BackEndSecretaria
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
+            //Configuracion de archivo de configuracion
+            string connectionstring = Configuration.GetConnectionString("secretaria");
+            
+            services.AddDbContext<Contexto>(option => option.UseMySQL(connectionstring));
+            
+            services.AddScoped<DbContext, Contexto>();
+
             //Configuracion Swagger
             services.AddSwaggerGen(option =>
             {
@@ -30,6 +39,13 @@ namespace BackEndSecretaria
                     Version = "V1.0",
                     Description = "API"
                 });
+
+                //Configuracion Token (Autorizacion)
+                //option.AddSecurityDefinition("JWT", new ApiKeyScheme { In = "header", Description = "Please enter JWT", Name = "Token", Type = "apiKey" });
+
+                //option.AddSecurityRequirement(new Dictionary<string, IEnumerable<string>> {
+                //    { "JWT", Enumerable.Empty<string>() },
+                //});
             });
         }
 

@@ -25,7 +25,7 @@ namespace DominioSecretaria.ADO
         List<Nacionalidad> traerNacionalidades();
         List<Seguimiento> traerSeguimientos();
         List<TipoDocumento> traerTipoDocumentos();
-        List<Alumno> traerAlumnos();
+        List<Alumno> traerAlumnosSinDetalle();
         List<Curso> traerCursos();
         List<Domicilio> traerDomicilios();
     }

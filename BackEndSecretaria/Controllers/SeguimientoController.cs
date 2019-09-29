@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using BackEndSecretaria.ViewModel;
 using DominioSecretaria.ADO;
 using DominioSecretaria.Escuela;
 using Microsoft.AspNetCore.Http;
@@ -9,44 +10,62 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace BackEndSecretaria.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/[controller]/[action]")]
     [ApiController]
     public class SeguimientoController : ControllerBase
     {
+        private readonly Contexto contexto;
+
+        public SeguimientoController(Contexto contexto)
+        {
+            this.contexto = contexto;
+        }
         // GET: api/Seguimiento
         [HttpGet]
-        public IEnumerable<Seguimiento> Get()
+        public IEnumerable<SeguimientoViewModel> TraerTodos()
         {
-            AdoEntityCoreMySQL ado = new AdoEntityCoreMySQL();
-            return ado.traerSeguimientos();
+            AdoEntityCoreMySQL ado = new AdoEntityCoreMySQL(contexto);
+
+            var seguimiento = ado.traerSeguimientos().Select(x => new SeguimientoViewModel{ legajo = x.Alumno.legajo, observacion = x.Observacion, fecha = x.Fecha });
+            
+            return seguimiento;
         }
 
         // GET: api/Seguimiento/5
         [HttpGet("{id}")]
-        public Seguimiento Get(int id)
+        public SeguimientoViewModel TraerPorId (int id)
         {
-            AdoEntityCoreMySQL ado = new AdoEntityCoreMySQL();
-            return ado.traerSeguimientoById(id);
+            AdoEntityCoreMySQL ado = new AdoEntityCoreMySQL(contexto);
+
+            var seguimiento = ado.traerSeguimientoById(id);
+            
+            var seguimientoViewModel = new SeguimientoViewModel
+            {
+                legajo=seguimiento.Alumno.legajo,
+                observacion=seguimiento.Observacion,
+                fecha=seguimiento.Fecha
+            };
+            
+            return seguimientoViewModel;
         }
 
         // POST: api/Seguimiento
         [HttpPost]
-        public void Post([FromBody] Seguimiento seguimiento)
+        public void Crear([FromBody] SeguimientoViewModel seguimientoViewModel)
         {
-            AdoEntityCoreMySQL ado = new AdoEntityCoreMySQL();
+            AdoEntityCoreMySQL ado = new AdoEntityCoreMySQL(contexto);
+            
+            var alumnoxlegajo = contexto.Alumnos.SingleOrDefault(x => x.legajo == seguimientoViewModel.legajo);
+
+            var seguimiento = new Seguimiento
+            {
+               Observacion=seguimientoViewModel.observacion,
+               Fecha=seguimientoViewModel.fecha,
+               Alumno=alumnoxlegajo
+            };
+            
             ado.altaSeguimiento(seguimiento);
         }
 
-        // PUT: api/Seguimiento/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
-        {
-        }
-
-        // DELETE: api/ApiWithActions/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
-        }
     }
 }

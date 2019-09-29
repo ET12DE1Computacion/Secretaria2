@@ -12,6 +12,7 @@ namespace DominioSecretaria.Escuela
 
         public byte Anio { get; set; }
 
+
         public List<Alumno> Alumnos { get; set; }
 
         public Curso()
