@@ -22,8 +22,5 @@ namespace DominioSecretaria.InfoPersonal
 
         [NotMapped]
         public Domicilio Domicilio => Persona.Domicilio;
-
-        [NotMapped]
-        public string MailFull => Persona.MailFull;
     }
 }

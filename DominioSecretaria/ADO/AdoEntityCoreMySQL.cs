@@ -16,6 +16,11 @@ namespace DominioSecretaria.ADO
             Contexto = new Contexto();
         }
 
+        public AdoEntityCoreMySQL(Contexto contexto)
+        {
+            this.Contexto = contexto;
+        }
+
         public void altaAlumno(Alumno alumno)
         {
             Contexto.Alumnos.Add(alumno);
@@ -34,12 +39,6 @@ namespace DominioSecretaria.ADO
             Contexto.SaveChanges();
         }
 
-        public void altaDominioMail(DominioMail dominioMail)
-        {
-            Contexto.DominiosMails.Add(dominioMail);
-            Contexto.SaveChanges();
-        }
-
         public Alumno traerAlumnoById(int id)
         {
             return Contexto.Alumnos.FirstOrDefault(x => x.legajo == id);
@@ -52,11 +51,6 @@ namespace DominioSecretaria.ADO
         public Domicilio traerDomicilioById(int id)
         {
             return Contexto.Domicilios.FirstOrDefault(x => x.IdDomicilio == id);
-        }
-
-        public DominioMail traerDominioMailById(int id)
-        {
-            return Contexto.DominiosMails.FirstOrDefault(x => x.Id == id);
         }
 
         public void bajaNacionalidad(int id)
@@ -142,7 +136,6 @@ namespace DominioSecretaria.ADO
         public List<Persona> traerPersonas()
         {
             return Contexto.Personas
-                    .Include(p => p.DominioMail)
                     .Include(p => p.TipoDocumento)
                     .Include(p => p.Nacionalidad)
                     .Include(p => p.Domicilio.Localidad)
@@ -150,17 +143,39 @@ namespace DominioSecretaria.ADO
                     .ToList();
         }
         public List<Nacionalidad> traerNacionalidades() => Contexto.Nacionalidades.ToList();
-        public List<DominioMail> traerDominioMails() => Contexto.DominiosMails.ToList();
         public List<Localidad> traerLocalidades() => Contexto.Localidades.ToList();
 
         public List<Seguimiento> traerSeguimientos() => Contexto.Seguimientos.ToList();
 
         public List<TipoDocumento> traerTipoDocumentos() => Contexto.TipoDocumentos.ToList();
 
-        public List<Alumno> traerAlumnos() => Contexto.Alumnos.ToList();
+        public List<Alumno> traerAlumnosSinDetalle()
+        {
+            return Contexto.Alumnos.Include(x => x.Persona)
+                .Include(x => x.CursoActual).ToList();
+        }
+
+        public List<Alumno> traerAlumnosConDetalle()
+        {
+            return Contexto.Alumnos
+                .Include(x=>x.CursoActual)
+                .Include(x => x.Persona)
+                    .ThenInclude(x => x.TipoDocumento)
+                .Include(x=>x.Persona)
+                    .ThenInclude(x=>x.Nacionalidad)
+                .Include(x => x.Persona)
+                    .ThenInclude(x => x.Domicilio)
+                        .ThenInclude(x => x.Localidad)
+                .ToList();
+                
+        }
 
         public List<Curso> traerCursos() => Contexto.Cursos.ToList();
 
         public List<Domicilio> traerDomicilios() => Contexto.Domicilios.ToList();
+        public List<Cursada> traerCursada()
+        {
+            return Contexto.Cursadas.Include(x => x.Curso).ToList();          
+        }
     }
 }

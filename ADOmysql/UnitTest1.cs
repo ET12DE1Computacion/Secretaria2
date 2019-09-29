@@ -1,9 +1,7 @@
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using DominioSecretaria.InfoPersonal;
-using DominioSecretaria.Escuela;
-using System;
 using DominioSecretaria.ADO;
-
+using DominioSecretaria.InfoPersonal;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System;
 
 namespace ADOmysql
 {
@@ -38,7 +36,7 @@ namespace ADOmysql
                 Nombre = "Carlo",
                 Apellido = "Santana",
                 Domicilio = d1,
-                Mail = "carlosantanita10@gmail.com",
+                Mail = "carlo@gmail.com",
                 NroDocumento = 456123789,
                 Nacimiento = new DateTime(2004, 12, 02),
                 Nacionalidad = nacionalidad,
@@ -47,8 +45,13 @@ namespace ADOmysql
             
             var ado1 = new AdoEntityCoreMySQL();
             ado1.Contexto = new Contexto();
+            ado1.Contexto.Database.EnsureDeleted();
             ado1.Contexto.Database.EnsureCreated();
             ado1.altaPersona(p1);
+            ado1.Contexto = new Contexto();
+            var persona = ado1.traerPersonas()[0];
+            Assert.IsNotNull(persona.Domicilio.Localidad);
+            Assert.AreEqual("CABA", persona.Domicilio.Localidad.Cadena);
         }
     }
 }

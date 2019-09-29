@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using BackEndSecretaria.ViewModel;
 using DominioSecretaria.ADO;
 using DominioSecretaria.InfoPersonal;
 using Microsoft.AspNetCore.Http;
@@ -9,44 +10,57 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace BackEndSecretaria.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/[controller]/[action]")]
     [ApiController]
     public class LocalidadController : ControllerBase
     {
+        private readonly Contexto contexto;
+
+        public LocalidadController(Contexto contexto)
+        {
+            this.contexto = contexto;
+        }
         // GET: api/Localidad
         [HttpGet]
-        public IEnumerable<Localidad> Get()
+        public IEnumerable<LocalidadViewModel> TraerTodos()
         {
-            AdoEntityCoreMySQL ado = new AdoEntityCoreMySQL();
-            return ado.traerLocalidades();
+            AdoEntityCoreMySQL ado = new AdoEntityCoreMySQL(contexto);
+
+            var LocalidadesViewModel = ado.traerLocalidades().Select(x => new LocalidadViewModel { IdLocalidad = x.Id , Localidad = x.Cadena });
+            
+            return LocalidadesViewModel;
         }
 
         // GET: api/Localidad/5
         [HttpGet("{id}")]
-        public Localidad Get(byte id)
+        public LocalidadViewModel TraerPorId(byte id)
         {
-            AdoEntityCoreMySQL ado = new AdoEntityCoreMySQL();
-            return ado.traerLocalidadById(id);
+            AdoEntityCoreMySQL ado = new AdoEntityCoreMySQL(contexto);
+
+            var localidad = ado.traerLocalidadById(id);
+
+            var localidadViewModel = new LocalidadViewModel
+            {
+                IdLocalidad = localidad.Id,
+                Localidad = localidad.Cadena
+            };
+
+            return localidadViewModel;
         }
 
         // POST: api/Localidad
         [HttpPost]
-        public void Post([FromBody] Localidad localidad)
+        public void Crear([FromBody] LocalidadViewModel localidadViewModel)
         {
-            AdoEntityCoreMySQL ado = new AdoEntityCoreMySQL();
+            AdoEntityCoreMySQL ado = new AdoEntityCoreMySQL(contexto);
+
+            var localidad = new Localidad
+            {
+                Id = localidadViewModel.IdLocalidad,
+                Cadena = localidadViewModel.Localidad
+            };
+
             ado.altaLocalidad(localidad);
-        }
-
-        // PUT: api/Localidad/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
-        {
-        }
-
-        // DELETE: api/ApiWithActions/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
         }
     }
 }
