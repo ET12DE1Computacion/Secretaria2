@@ -10,7 +10,9 @@ namespace DominioSecretaria.ADO.ContextConfiguracion
         {
             string fkPersona = "idPersona";
             string fkAlumno = "legajo";
-            mb.ToTable("tutor");            
+            mb.ToTable("tutor");
+
+            mb.HasKey(c => c.TipoTutor);
 
             mb.HasOne(t => t.Alumno)
                 .WithMany(a => a.Tutores)
@@ -26,8 +28,6 @@ namespace DominioSecretaria.ADO.ContextConfiguracion
                 .WithMany()
                 .HasForeignKey("idTipoTutor")
                 .IsRequired();
-
-            mb.HasKey(c => new[] {fkAlumno, fkPersona });
         }
     }
 }

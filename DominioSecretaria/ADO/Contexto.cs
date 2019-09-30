@@ -27,7 +27,7 @@ namespace DominioSecretaria.ADO
         internal DbSet<Nacionalidad> Nacionalidades { get; set; }
         internal DbSet<DominioMail> DominiosMails { get; set; }
         internal DbSet<TipoTutor> TipoTutores { get; set; }
-        //internal DbSet<Tutor> Tutores { get; set; }
+        internal DbSet<Tutor> Tutores { get; set; }
         internal DbSet<Seguimiento> Seguimientos { get; set; }
         public DbSet<Cursada> Cursadas { get; set; }
         private DbSet<Falta> Falta { get; set; }

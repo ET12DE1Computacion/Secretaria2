@@ -19,6 +19,7 @@ namespace DominioSecretaria.ADO.ContextConfiguracion
 
             mb.Property(t => t.Id)
                 .HasColumnName("idTipoTutor");
+
             mb.Property(t => t.Cadena)
                 .HasColumnName("tipoTutor")
                 .HasMaxLength(45);
