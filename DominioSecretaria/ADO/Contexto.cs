@@ -31,6 +31,10 @@ namespace DominioSecretaria.ADO
         internal DbSet<Seguimiento> Seguimientos { get; set; }
         public DbSet<Cursada> Cursadas { get; set; }
         private DbSet<Falta> Falta { get; set; }
+        public DbSet<TipoAusencia> TipoAusencias { get; set; }
+        public DbSet<TipoFalta> TipoFaltas { get; set; }
+        public DbSet<AsistenciaCurso> AsistenciaCursos { get; set; }
+        public DbSet<Falta> Faltas { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -74,6 +78,13 @@ namespace DominioSecretaria.ADO
 
             mb.ApplyConfiguration(new CursoConfiguracion());
 
+            mb.ApplyConfiguration(new TipoAusenciaConfiguracion());
+
+            mb.ApplyConfiguration(new TipoFaltaConfiguracion());
+
+            mb.ApplyConfiguration(new AsistenciaCursoConfiguracion());
+
+            mb.ApplyConfiguration(new FaltaConfiguracion());
             base.OnModelCreating(mb);
         }
     }

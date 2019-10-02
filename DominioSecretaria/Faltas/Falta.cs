@@ -9,29 +9,18 @@ namespace DominioSecretaria.Faltas
     [NotMapped]
     public class Falta
     {
-        [Key,Column("idFalta")]
         public int id { get; set; }
-
-        [ForeignKey("idCursada")]
-        [Required]
-        public Cursada Cursada { get; private set; }
-
-        [ForeignKey("idTipoFalta")]
-        [Required]
-        public TipoFalta TipoFalta { get; set; }
-
-        [Column("fecha", TypeName = "Date")]
-        [Required]
+        public Alumno legajo { get; set; }
+        public TipoFalta idTipoFalta { get; set; }
+        public TipoAusencia idTipoAusencia { get; set; }
         public DateTime Fecha { get; set; }
-
-        [Column("justificada")]
-        [Required]
+        public string falta { get; set; }
         public bool Justificada { get; set; } = false;
 
         public Falta(Cursada cursada, TipoFalta tipoFalta)
         {
-            Cursada = cursada;
-            TipoFalta = tipoFalta;
+
+            idTipoFalta = tipoFalta;
             Fecha = DateTime.Now.Date;
             Justificada = false;
         }
