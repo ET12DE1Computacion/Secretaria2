@@ -12,7 +12,7 @@ namespace DominioSecretaria.ADO.ContextConfiguracion
             string fkAlumno = "legajo";
             mb.ToTable("tutor");
 
-            mb.HasKey(c => c.TipoTutor);
+            mb.HasKey(c => c.Id);
 
             mb.HasOne(t => t.Alumno)
                 .WithMany(a => a.Tutores)

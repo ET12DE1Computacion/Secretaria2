@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace DominioSecretaria.InfoPersonal
 {
-    public class TipoDocumento: TextoSencillo
+    public class TipoDocumento : TextoSencillo
     {
     }
 }

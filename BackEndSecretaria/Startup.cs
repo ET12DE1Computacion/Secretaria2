@@ -26,7 +26,7 @@ namespace BackEndSecretaria
             //Configuracion de archivo de configuracion
             string connectionstring = Configuration.GetConnectionString("secretaria");
             
-            services.AddDbContext<Contexto>(option => option.UseMySQL(connectionstring));
+            services.AddDbContext<Contexto>(option => option.UseMySQL(connectionstring, b => b.MigrationsAssembly("BackEndSecretaria")));
             
             services.AddScoped<DbContext, Contexto>();
 

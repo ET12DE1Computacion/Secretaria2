@@ -12,17 +12,16 @@ namespace DominioSecretaria.Escuela
     {        
         public int legajo { get; set; }
 
-        [ForeignKey("idCursoActual")]
         public Curso CursoActual { get; set; }
 
-        [Column("libro")]
         public int Libro { get; set; }
 
-        [Column("folio")]
         public int Folio { get; set; }        
 
         public List<Seguimiento> Seguimientos { get; set; }
+
         public List<Tutor> Tutores { get; set; }
+        
         public List<Cursada> Cursadas { get; set; }
 
         public Alumno(Persona persona) : base(persona)

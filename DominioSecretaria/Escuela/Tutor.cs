@@ -13,6 +13,7 @@ namespace DominioSecretaria.Escuela
         public TipoTutor TipoTutor { get; set; }
 
         public Tutor() : base() { }
+
         public Tutor(Persona persona) : base(persona) { }
     }
 }

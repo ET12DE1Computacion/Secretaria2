@@ -6,7 +6,6 @@ namespace DominioSecretaria.InfoPersonal
 {
     public class Persona
     {
-
         public int IdPersona { get; set; }
         public string Nombre { get; set; }
         public string Apellido { get; set; }
@@ -15,9 +14,7 @@ namespace DominioSecretaria.InfoPersonal
         public virtual Nacionalidad Nacionalidad { get; set; }
         public virtual TipoDocumento TipoDocumento { get; set; }
         public int NroDocumento { get; set; }
-
         public DateTime Nacimiento { get; set; }
-
         public long? Telefono1 { get; set; }
         public long? Telefono2 { get; set; }
         public Persona() { }

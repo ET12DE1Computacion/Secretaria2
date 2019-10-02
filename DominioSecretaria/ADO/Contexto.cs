@@ -1,4 +1,5 @@
-﻿using DominioSecretaria.ADO.ContextConfiguracion;
+﻿
+using DominioSecretaria.ADO.ContextConfiguracion;
 using DominioSecretaria.Escuela;
 using DominioSecretaria.Faltas;
 using DominioSecretaria.InfoPersonal;
@@ -25,7 +26,6 @@ namespace DominioSecretaria.ADO
         public DbSet<Curso> Cursos { get; set; }
         internal DbSet<TipoDocumento> TipoDocumentos { get; set; }
         internal DbSet<Nacionalidad> Nacionalidades { get; set; }
-        internal DbSet<DominioMail> DominiosMails { get; set; }
         internal DbSet<TipoTutor> TipoTutores { get; set; }
         internal DbSet<Tutor> Tutores { get; set; }
         internal DbSet<Seguimiento> Seguimientos { get; set; }
@@ -39,53 +39,40 @@ namespace DominioSecretaria.ADO
         protected override void OnModelCreating(ModelBuilder mb)
         {
              
-            mb.Entity<TipoTutor>(entidad =>
-            {
-                entidad.HasIndex(l => l.Cadena)
-                        .IsUnique();
+            //mb.Entity<TipoFalta>(entidad =>
+            //{
+            //    entidad.HasIndex(l => l.Cadena)
+            //            .IsUnique();
 
-                entidad.Property(l => l.Id)
-                        .HasColumnName("idTipoTutor");
+            //    entidad.Property(l => l.Id)
+            //            .HasColumnName("idTipoFalta");
 
-                entidad.Property(l => l.Cadena)
-                        .HasColumnName("tipoTutor")
-                        .HasMaxLength(15);
+            //    entidad.Property(l => l.Cadena)
+            //            .HasColumnName("tipoFalta")
+            //            .HasMaxLength(30);
+            //});
 
-                entidad.Property(l => l.Cadena)
-                        .HasColumnName("dominio")
-                        .HasMaxLength(35);
-            });
+            mb.ApplyConfiguration(new LocalidadConfiguracion());
 
-            mb.Entity<TipoFalta>(entidad =>
-            {
-                entidad.HasIndex(l => l.Cadena)
-                        .IsUnique();
+            mb.ApplyConfiguration(new NacionalidadConfiguracion());
 
-                entidad.Property(l => l.Id)
-                        .HasColumnName("idTipoFalta");
+            mb.ApplyConfiguration(new TipoDocumentoConfiguracion());
 
-                entidad.Property(l => l.Cadena)
-                        .HasColumnName("tipoFalta")
-                        .HasMaxLength(30);
-            });
+            mb.ApplyConfiguration(new DomicilioConfiguracion());
 
-            mb.ApplyConfiguration<Localidad>(new LocalidadConfiguracion());
+            mb.ApplyConfiguration(new PersonaConfiguracion());
 
-            mb.ApplyConfiguration<Nacionalidad>(new NacionalidadConfiguracion());
+            mb.ApplyConfiguration(new CursadaConfiguracion());
 
-            mb.ApplyConfiguration<TipoDocumento>(new TipoDocumentoConfiguracion());
+            mb.ApplyConfiguration(new SeguimientoConfiguracion());
 
-            mb.ApplyConfiguration<Domicilio>(new DomicilioConfiguracion());
+            mb.ApplyConfiguration(new TipoTutorConfiguracion());
 
-            mb.ApplyConfiguration<Persona>(new PersonaConfiguracion());
+            mb.ApplyConfiguration(new TutorConfiguracion());
 
-            mb.ApplyConfiguration<Cursada>(new CursadaConfiguracion());
+            mb.ApplyConfiguration(new AlumnoConfiguracion());
 
-            mb.ApplyConfiguration<Seguimiento>(new SeguimientoConfiguracion());
-
-            mb.ApplyConfiguration<TipoTutor>(new TipoTutorConfiguracion());
-
-            mb.ApplyConfiguration<Tutor>(new TutorConfiguracion());
+            mb.ApplyConfiguration(new CursoConfiguracion());
 
             base.OnModelCreating(mb);
         }

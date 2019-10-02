@@ -21,7 +21,7 @@ namespace DominioSecretaria.ADO.ContextConfiguracion
                 .HasForeignKey("idPersona")
                 .IsRequired();
 
-            mb.Property<byte>("idCursoActual");
+            mb.Property<int>("idCursoActual");
             mb.HasOne(a => a.CursoActual)
                 .WithMany()
                 .HasForeignKey("idCursoActual")
