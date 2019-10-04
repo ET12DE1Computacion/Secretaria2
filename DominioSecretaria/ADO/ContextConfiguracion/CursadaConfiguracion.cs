@@ -31,9 +31,7 @@ namespace DominioSecretaria.ADO.ContextConfiguracion
 
             mb.Property(c => c.CicloLectivo)
                     .HasColumnName("cicloLectivo")
-                    .IsRequired();
-
-    
+                    .IsRequired();    
         }
     }
 }

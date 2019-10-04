@@ -8,7 +8,7 @@ using System.Linq;
 
 namespace DominioSecretaria.Escuela
 {
-    public class Alumno: EsPersona
+    public class Alumno : EsPersona
     {        
         public int legajo { get; set; }
 
@@ -23,6 +23,8 @@ namespace DominioSecretaria.Escuela
         public List<Tutor> Tutores { get; set; }
         
         public List<Cursada> Cursadas { get; set; }
+
+        public List<Falta> faltas { get; set; }
 
         public Alumno(Persona persona) : base(persona)
         {

@@ -15,14 +15,14 @@ namespace DominioSecretaria.ADO.ContextConfiguracion
 
             mb.HasKey(a => a.idAsistenciaCurso);
 
-            mb.HasOne(a => a.idCurso)
-                .WithMany()
-                .HasForeignKey("idCurso")
-                .IsRequired();
+            //mb.HasOne(a => a.idCurso)
+            //    .WithMany()
+            //    .HasForeignKey("idCurso")
+            //    .IsRequired();
 
-            mb.HasOne(a => a.idTipoFalta)
-                .WithMany()
-                .HasForeignKey("idTipoFalta");
+            //mb.HasOne(a => a.idTipoFalta)
+            //    .WithMany()
+            //    .HasForeignKey("idTipoFalta");
 
             mb.Property(a => a.idAsistenciaCurso)
                 .HasColumnName("idAsistenciaCurso")
@@ -36,8 +36,8 @@ namespace DominioSecretaria.ADO.ContextConfiguracion
                 .HasColumnName("idTipoFalta")
                 .IsRequired();
 
-            mb.Property(a => a.falta)
-                .HasColumnName("falta")
+            mb.Property(a => a.fecha)
+                .HasColumnName("fecha")
                 .IsRequired();
         }
 

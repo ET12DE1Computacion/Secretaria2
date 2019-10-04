@@ -5,23 +5,27 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace DominioSecretaria.Faltas
 {
-    //[Table("Falta")]
-    [NotMapped]
     public class Falta
     {
-        public int id { get; set; }
-        public Alumno legajo { get; set; }
+        public int idFalta { get; set; }
+
+        public Alumno alumno { get; set; }
+
         public TipoFalta idTipoFalta { get; set; }
+
         public TipoAusencia idTipoAusencia { get; set; }
-        public DateTime Fecha { get; set; }
-        public string falta { get; set; }
+
+        public DateTime fecha { get; set; }
+
+        public float falta { get; set; }
+
         public bool Justificada { get; set; } = false;
 
         public Falta(Cursada cursada, TipoFalta tipoFalta)
         {
 
             idTipoFalta = tipoFalta;
-            Fecha = DateTime.Now.Date;
+            fecha = DateTime.Now.Date;
             Justificada = false;
         }
 

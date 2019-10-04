@@ -13,28 +13,28 @@ namespace DominioSecretaria.ADO.ContextConfiguracion
         {
             mb.ToTable("Falta");
 
-            mb.HasKey(f => f.id);
+            mb.HasKey(f => f.idFalta);
 
-            mb.HasOne(f => f.legajo)
-                .WithMany()
+            mb.HasOne(f => f.alumno)
+                .WithMany(x => x.faltas)
                 .HasForeignKey("legajo")
                 .IsRequired();
 
             mb.HasOne(f => f.idTipoFalta)
-                .WithMany()
+                .WithMany(x => x.faltas)
                 .HasForeignKey("idTipoFalta")
                 .IsRequired();
 
             mb.HasOne(f => f.idTipoAusencia)
                 .WithMany()
-                .HasForeignKey("isTipoAusencia")
+                .HasForeignKey("idTipoAusencia")
                 .IsRequired();
 
-            mb.Property(f => f.id)
+            mb.Property(f => f.idFalta)
                 .HasColumnName("idFalta")
                 .IsRequired();
 
-            mb.Property(f => f.legajo)
+            mb.Property(f => f.alumno)
                 .HasColumnName("legajo")
                 .IsRequired();
 
@@ -46,7 +46,7 @@ namespace DominioSecretaria.ADO.ContextConfiguracion
                 .HasColumnName("idTipoAusencia")
                 .IsRequired();
 
-            mb.Property(f => f.Fecha)
+            mb.Property(f => f.fecha)
                 .HasColumnName("fecha")
                 .IsRequired();
 

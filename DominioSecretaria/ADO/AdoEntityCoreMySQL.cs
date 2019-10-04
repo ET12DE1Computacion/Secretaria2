@@ -143,6 +143,7 @@ namespace DominioSecretaria.ADO
                     .ToList();
         }
         public List<Nacionalidad> traerNacionalidades() => Contexto.Nacionalidades.ToList();
+
         public List<Localidad> traerLocalidades() => Contexto.Localidades.ToList();
 
         public List<Seguimiento> traerSeguimientos() => Contexto.Seguimientos.ToList();

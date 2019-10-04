@@ -78,13 +78,14 @@ namespace DominioSecretaria.ADO
 
             mb.ApplyConfiguration(new CursoConfiguracion());
 
+            mb.ApplyConfiguration(new AsistenciaCursoConfiguracion());
+
             mb.ApplyConfiguration(new TipoAusenciaConfiguracion());
 
             mb.ApplyConfiguration(new TipoFaltaConfiguracion());
-
-            mb.ApplyConfiguration(new AsistenciaCursoConfiguracion());
-
+            
             mb.ApplyConfiguration(new FaltaConfiguracion());
+
             base.OnModelCreating(mb);
         }
     }
