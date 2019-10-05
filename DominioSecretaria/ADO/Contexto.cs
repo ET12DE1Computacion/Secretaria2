@@ -41,21 +41,7 @@ namespace DominioSecretaria.ADO
         }
 
         protected override void OnModelCreating(ModelBuilder mb)
-        {
-             
-            //mb.Entity<TipoFalta>(entidad =>
-            //{
-            //    entidad.HasIndex(l => l.Cadena)
-            //            .IsUnique();
-
-            //    entidad.Property(l => l.Id)
-            //            .HasColumnName("idTipoFalta");
-
-            //    entidad.Property(l => l.Cadena)
-            //            .HasColumnName("tipoFalta")
-            //            .HasMaxLength(30);
-            //});
-
+        {           
             mb.ApplyConfiguration(new LocalidadConfiguracion());
 
             mb.ApplyConfiguration(new NacionalidadConfiguracion());
