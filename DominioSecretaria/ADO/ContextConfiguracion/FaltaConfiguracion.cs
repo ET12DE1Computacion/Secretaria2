@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using DominioSecretaria.Faltas;
+﻿using DominioSecretaria.Faltas;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -11,47 +8,44 @@ namespace DominioSecretaria.ADO.ContextConfiguracion
     {
         public void Configure(EntityTypeBuilder<Falta> mb)
         {
+            //tabla
             mb.ToTable("Falta");
 
-            mb.HasKey(f => f.idFalta);
+            //primary key
+            mb.HasKey(f => f.IdFalta);
 
-            mb.HasOne(f => f.alumno)
-                .WithMany(x => x.faltas)
-                .HasForeignKey("legajo")
+            mb.Property(f => f.IdFalta)
+                .HasColumnName("idFalta")
+                .IsRequired();
+            
+            //foreign key
+            mb.HasOne(f => f.Alumno)
+                .WithMany(x => x.Faltas)
+                .HasForeignKey("idAlumno")
                 .IsRequired();
 
-            mb.HasOne(f => f.idTipoFalta)
-                .WithMany(x => x.faltas)
+            mb.HasOne(f => f.TipoFalta)
+                .WithMany(x => x.Faltas)
                 .HasForeignKey("idTipoFalta")
                 .IsRequired();
 
-            mb.HasOne(f => f.idTipoAusencia)
-                .WithMany()
+            mb.HasOne(f => f.TipoAusencia)
+                .WithMany(x => x.Faltas)
                 .HasForeignKey("idTipoAusencia")
                 .IsRequired();
 
-            mb.Property(f => f.idFalta)
-                .HasColumnName("idFalta")
+            mb.HasOne(x => x.Cursada)
+                .WithMany(x => x.Faltas)
+                .HasForeignKey("idCursada")
                 .IsRequired();
 
-            mb.Property(f => f.alumno)
-                .HasColumnName("legajo")
-                .IsRequired();
-
-            mb.Property(f => f.idTipoFalta)
-                .HasColumnName("idTipoFalta")
-                .IsRequired();
-
-            mb.Property(f => f.idTipoAusencia)
-                .HasColumnName("idTipoAusencia")
-                .IsRequired();
-
-            mb.Property(f => f.fecha)
+            //propiedades
+            mb.Property(f => f.Fecha)
                 .HasColumnName("fecha")
                 .IsRequired();
 
-            mb.Property(f => f.falta)
-                .HasColumnName("falta")
+            mb.Property(f => f.ValorFalta)
+                .HasColumnName("valorFalta")
                 .IsRequired();
 
             mb.Property(F => F.Justificada)

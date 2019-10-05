@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using DominioSecretaria.Escuela;
+﻿using DominioSecretaria.Escuela;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -11,25 +8,29 @@ namespace DominioSecretaria.ADO.ContextConfiguracion
     {
         public void Configure(EntityTypeBuilder<Alumno> mb)
         {
+            //tabla
             mb.ToTable("Alumno");
 
+            //primary key
             mb.HasKey(a => a.legajo);
 
+            mb.Property(a => a.legajo)
+                .HasColumnName("legajoAlumno");
+
+            //foreign key
             mb.Property<int>("idPersona");
+
             mb.HasOne(a => a.Persona)
                 .WithMany()
                 .HasForeignKey("idPersona")
                 .IsRequired();
 
-            mb.Property<int>("idCursoActual");
             mb.HasOne(a => a.CursoActual)
-                .WithMany()
+                .WithMany(x => x.Alumnos)
                 .HasForeignKey("idCursoActual")
                 .IsRequired();
 
-            mb.Property(a => a.legajo)
-                .HasColumnName("legajo");
-
+            //propiedades
             mb.Property(a => a.Libro)
                 .HasColumnName("libro");
 

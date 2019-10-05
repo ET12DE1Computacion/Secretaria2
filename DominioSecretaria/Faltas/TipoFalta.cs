@@ -4,14 +4,17 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace DominioSecretaria.Faltas
 {
-    [Table("TipoFalta")]
     public class TipoFalta : TextoSencillo
     {
-        public List<Falta> faltas { get; set; }
+        public List<Falta> Faltas { get; set; }
+
+        public List<AsistenciaCurso> AsistenciaCurso { get; set; }
 
         public TipoFalta()
         {
-            faltas = new List<Falta>();
+            Faltas = new List<Falta>();
+
+            AsistenciaCurso = new List<AsistenciaCurso>();
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using DominioSecretaria.Faltas;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -11,13 +12,15 @@ namespace DominioSecretaria.Escuela
         public byte Division { get; set; }
 
         public byte Anio { get; set; }
-
-
+        
         public List<Alumno> Alumnos { get; set; }
+
+        public List<AsistenciaCurso> AsistenciaCurso { get; set; }
 
         public Curso()
         {
             Alumnos = new List<Alumno>();
+            AsistenciaCurso = new List<AsistenciaCurso>();
         }
 
         public Curso(byte anio, byte division) : this()

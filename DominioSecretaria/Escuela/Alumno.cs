@@ -1,10 +1,8 @@
-﻿using DominioSecretaria.Faltas;
-using DominioSecretaria.InfoPersonal;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
+using DominioSecretaria.Faltas;
+using DominioSecretaria.InfoPersonal;
 
 namespace DominioSecretaria.Escuela
 {
@@ -24,8 +22,9 @@ namespace DominioSecretaria.Escuela
         
         public List<Cursada> Cursadas { get; set; }
 
-        public List<Falta> faltas { get; set; }
+        public List<Falta> Faltas { get; set; }
 
+        #region
         public Alumno(Persona persona) : base(persona)
         {
             iniciarListas();
@@ -79,6 +78,7 @@ namespace DominioSecretaria.Escuela
             Tutores = new List<Tutor>();
             Seguimientos = new List<Seguimiento>();
             Cursadas = new List<Cursada>();
+            Faltas = new List<Falta>();
         }
 
         public List<Falta> faltasActualCiclo()
@@ -109,5 +109,6 @@ namespace DominioSecretaria.Escuela
             this.Seguimientos.Add(seguimiento);
             seguimiento.Alumno = this;
         }
+        #endregion
     }
 }

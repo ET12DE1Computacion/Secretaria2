@@ -7,28 +7,25 @@ namespace DominioSecretaria.Faltas
 {
     public class Falta
     {
-        public int idFalta { get; set; }
+        public int IdFalta { get; set; }
 
-        public Alumno alumno { get; set; }
+        public Alumno Alumno { get; set; }
 
-        public TipoFalta idTipoFalta { get; set; }
+        public TipoFalta TipoFalta { get; set; }
 
-        public TipoAusencia idTipoAusencia { get; set; }
+        public TipoAusencia TipoAusencia { get; set; }
 
-        public DateTime fecha { get; set; }
+        public Cursada Cursada { get; set; }
 
-        public float falta { get; set; }
+        public DateTime Fecha { get; set; }
+
+        public float ValorFalta { get; set; }
 
         public bool Justificada { get; set; } = false;
 
-        public Falta(Cursada cursada, TipoFalta tipoFalta)
-        {
+        public Falta()
+        { 
 
-            idTipoFalta = tipoFalta;
-            fecha = DateTime.Now.Date;
-            Justificada = false;
         }
-
-        public Falta() { }
     }
 }

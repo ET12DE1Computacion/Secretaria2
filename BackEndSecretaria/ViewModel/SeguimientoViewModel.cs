@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace BackEndSecretaria.ViewModel
+namespace Secretaria.BackEnd.ViewModel
 {
     public class SeguimientoViewModel
     {

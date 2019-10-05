@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using DominioSecretaria.Escuela;
+﻿using DominioSecretaria.Escuela;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -15,9 +12,9 @@ namespace DominioSecretaria.ADO.ContextConfiguracion
 
             mb.HasKey(c => c.idCursada);
 
-            mb.HasOne<Alumno>(c => c.Alumno)
+            mb.HasOne(c => c.Alumno)
                 .WithMany(a => a.Cursadas)
-                .HasForeignKey("legajo")
+                .HasForeignKey("legajoAlumno")
                 .IsRequired();
 
             mb.HasOne(c => c.Curso)

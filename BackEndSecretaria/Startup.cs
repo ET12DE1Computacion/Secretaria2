@@ -7,7 +7,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Swashbuckle.AspNetCore.Swagger;
 
-namespace BackEndSecretaria
+namespace Secretaria.BackEnd
 {
     public class Startup
     {

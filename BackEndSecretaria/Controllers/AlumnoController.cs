@@ -2,14 +2,14 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using BackEndSecretaria.ViewModel;
+using Secretaria.BackEnd.ViewModel;
 using DominioSecretaria.ADO;
 using DominioSecretaria.Escuela;
 using DominioSecretaria.InfoPersonal;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
-namespace BackEndSecretaria.Controllers
+namespace Secretaria.BackEnd.Controllers
 {
     [Route("api/[controller]/[action]")]
     [ApiController]

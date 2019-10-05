@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using DominioSecretaria.Faltas;
+﻿using DominioSecretaria.Faltas;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -11,35 +8,31 @@ namespace DominioSecretaria.ADO.ContextConfiguracion
     {
         public void Configure(EntityTypeBuilder<AsistenciaCurso> mb)
         {
+            //Configurar tabla
             mb.ToTable("AsisienciaCurso");
 
-            mb.HasKey(a => a.idAsistenciaCurso);
+            //Configurar primary key
+            mb.HasKey(a => a.IdAsistenciaCurso);
 
-            //mb.HasOne(a => a.idCurso)
-            //    .WithMany()
-            //    .HasForeignKey("idCurso")
-            //    .IsRequired();
-
-            //mb.HasOne(a => a.idTipoFalta)
-            //    .WithMany()
-            //    .HasForeignKey("idTipoFalta");
-
-            mb.Property(a => a.idAsistenciaCurso)
+            mb.Property(a => a.IdAsistenciaCurso)
                 .HasColumnName("idAsistenciaCurso")
                 .IsRequired();
 
-            mb.Property(a => a.idCurso)
-                .HasColumnName("idCurso")
+            //configurar foreign key
+            mb.HasOne(a => a.Curso)
+                .WithMany(x => x.AsistenciaCurso)
+                .HasForeignKey("idCurso")
                 .IsRequired();
 
-            mb.Property(a => a.idTipoFalta)
-                .HasColumnName("idTipoFalta")
+            mb.HasOne(a => a.TipoFalta)
+                .WithMany(x => x.AsistenciaCurso)
+                .HasForeignKey("idTipoFalta")
                 .IsRequired();
 
-            mb.Property(a => a.fecha)
+            //configurar otras propiedades
+            mb.Property(a => a.Fecha)
                 .HasColumnName("fecha")
                 .IsRequired();
         }
-
     }
 }

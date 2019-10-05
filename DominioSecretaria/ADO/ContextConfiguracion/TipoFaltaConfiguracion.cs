@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using DominioSecretaria.Faltas;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using System.Text;
-using DominioSecretaria.Faltas;
 
 namespace DominioSecretaria.ADO.ContextConfiguracion
 {

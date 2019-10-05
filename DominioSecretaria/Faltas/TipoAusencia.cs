@@ -1,15 +1,19 @@
-﻿using System;
+﻿using DominioSecretaria.Util;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace DominioSecretaria.Faltas
 {
-    public class TipoAusencia
+    public class TipoAusencia : TextoSencillo
     {
-        public int idTipoAusencia { get; set; }
-        public string tipoAusencia { get; set; }
-        public float falta { get; set; }
+        public float ValorFalta { get; set; }
 
-        public TipoAusencia() { }
+        public List<Falta> Faltas { get; set; }
+
+        public TipoAusencia() 
+        {
+            Faltas = new List<Falta>();
+        }
     }
 }
