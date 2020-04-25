@@ -1,5 +1,5 @@
-using DominioSecretaria.ADO;
-using DominioSecretaria.InfoPersonal;
+using Secretaria.Domain.ADO;
+using Secretaria.Domain.InfoPersonal;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 
