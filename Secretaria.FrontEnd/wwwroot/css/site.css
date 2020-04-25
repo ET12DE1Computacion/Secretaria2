@@ -26,8 +26,9 @@ a {
 
 /* Sticky footer styles
 -------------------------------------------------- */
+/*Baje un pixel el tamaño de la fuente, default: 14px*/
 html {
-  font-size: 14px;
+  font-size: 13px !important; 
 }
 @media (min-width: 768px) {
   html {

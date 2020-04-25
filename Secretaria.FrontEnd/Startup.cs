@@ -4,11 +4,13 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Secretaria.Domain.ADO;
+using Secretaria.FrontEnd.Identity;
 
 namespace Secretaria.FrontEnd
 {
@@ -24,9 +26,24 @@ namespace Secretaria.FrontEnd
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            string connectionString = Configuration.GetConnectionString("secretaria_db");
+            string connectionStringSecretaria = Configuration.GetConnectionString("secretaria_db");
 
-            services.AddDbContext<SecretariaDbContext>(options => options.UseMySql(connectionString, x => x.MigrationsAssembly("Secretaria.FrontEnd")));
+            string connectionStringUsuarios = Configuration.GetConnectionString("usuarios_db");
+
+            services.AddDbContext<ApplicationDbContext>(options => options.UseMySql(connectionStringUsuarios));
+            
+            services.AddDbContext<SecretariaDbContext>(options => options.UseMySql(connectionStringSecretaria, x => x.MigrationsAssembly("Secretaria.FrontEnd")));
+
+            services.AddIdentity<ApplicationUser, ApplicationRole>().AddEntityFrameworkStores<ApplicationDbContext>();
+
+            services.Configure<IdentityOptions>(options =>
+            {
+                options.Password.RequiredLength = 8;
+                options.Password.RequireNonAlphanumeric = false;
+                options.Password.RequireUppercase = false;
+            });
+
+            services.ConfigureApplicationCookie(options => options.LoginPath = "/Administracion/Login");
 
             services.AddControllersWithViews();
         }
@@ -45,6 +62,8 @@ namespace Secretaria.FrontEnd
             app.UseStaticFiles();
 
             app.UseRouting();
+
+            app.UseAuthentication();
 
             app.UseAuthorization();
 
