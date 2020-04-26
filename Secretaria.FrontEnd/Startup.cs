@@ -59,6 +59,18 @@ namespace Secretaria.FrontEnd
             {
                 app.UseExceptionHandler("/Home/Error");
             }
+
+            using (var serviceScope = app.ApplicationServices.GetService<IServiceScopeFactory>().CreateScope())
+            {
+                var context = serviceScope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
+                context.Database.Migrate();
+            }
+
+            using (var serviceScope = app.ApplicationServices.GetService<IServiceScopeFactory>().CreateScope())
+            {
+                var context = serviceScope.ServiceProvider.GetRequiredService<SecretariaDbContext>();
+                context.Database.Migrate();
+            }
             app.UseStaticFiles();
 
             app.UseRouting();

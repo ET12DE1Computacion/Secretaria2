@@ -31,7 +31,6 @@ namespace Secretaria.FrontEnd.Controllers.Administracion
         }
 
         [HttpGet]
-        [Authorize(Roles = "Administrador")]
         public IActionResult CrearUsuario()
         {
             return View();
@@ -111,7 +110,6 @@ namespace Secretaria.FrontEnd.Controllers.Administracion
         }
 
         [HttpGet]
-        [Authorize(Roles = "Administrador")]
         public IActionResult Usuarios()
         {
             var users = userManager.Users;
@@ -119,7 +117,6 @@ namespace Secretaria.FrontEnd.Controllers.Administracion
         }
 
         [HttpGet]
-        [Authorize(Roles = "Administrador")]
         public IActionResult Roles()
         {
             var roles = roleManager.Roles;
@@ -127,7 +124,6 @@ namespace Secretaria.FrontEnd.Controllers.Administracion
         }
 
         [HttpGet]
-        [Authorize(Roles = "Administrador")]
         public IActionResult CrearRol()
         {
             return View();
@@ -170,7 +166,6 @@ namespace Secretaria.FrontEnd.Controllers.Administracion
         }
 
         [HttpGet]
-        [Authorize(Roles = "Administrador")]
         public async Task<IActionResult> EditarRol(string id)
         {
             // Find the role by Role ID
@@ -242,7 +237,6 @@ namespace Secretaria.FrontEnd.Controllers.Administracion
         }
 
         [HttpGet]
-        [Authorize(Roles = "Administrador")]
         public async Task<IActionResult> EditarUsuario(string id)
         {
             var user = await userManager.FindByIdAsync(id);
@@ -307,7 +301,6 @@ namespace Secretaria.FrontEnd.Controllers.Administracion
         }
 
         [HttpGet]
-        [Authorize(Roles = "Administrador")]
         public async Task<IActionResult> AdministrarUsuarioRol(string userId)
         {
             ViewBag.userId = userId;
@@ -378,7 +371,6 @@ namespace Secretaria.FrontEnd.Controllers.Administracion
         }
 
         [HttpGet]
-        [Authorize(Roles = "Administrador")]
         public async Task<IActionResult> EditarUsuarioEnRol(string roleId)
         {
             ViewBag.roleId = roleId;
@@ -515,7 +507,6 @@ namespace Secretaria.FrontEnd.Controllers.Administracion
         }
 
         [HttpGet]
-        [Authorize(Roles = "Administrador")]
         public async Task<IActionResult> AdministrarPermisosUsuario(string userId)
         {
             var user = await userManager.FindByIdAsync(userId);
