@@ -20,7 +20,11 @@ namespace Secretaria.FrontEnd.ViewModels.Administracion
 
         [Required(ErrorMessage = "Es obligatorio el Area del rol")]
         public string Area { get; set; }
-        
+
+        public string CreatedBy { get; set; }
+        public string CreationDate { get; set; }
+        public string CreationIp { get; set; }
+
         public List<string> Users { get; set; }
     }
 }

@@ -3,8 +3,8 @@
 @{
     ViewBag.Title = "Login";
 }
-<div class="container">
-    <div class="col-4">
+<div class="col-4">
+    <div class="et12-borde">
         <form method="post" asp-controller="Administracion" asp-action="Login" class="form-signin">
             <div class="mb-4">
                 <h1 class="display-4">Login</h1>
@@ -19,15 +19,15 @@
                 <input id="inputPassword" asp-for="Contrasenia" class="form-control" placeholder="Contraseña" required autofocus />
                 <span asp-validation-for="Contrasenia" class="text-danger"></span>
             </div>
-            @*<div class="form-group mb-3">
-                    <div class="checkbox">
-                        <label asp-for="Recordarme">
-                            <input asp-for="Recordarme" />
-                            @Html.DisplayNameFor(m => m.Recordarme)
-                        </label>
-                    </div>
-                </div>*@
-            <br>
+            <br />
+            <div class="form-group mb-3">
+                <div class="checkbox">
+                    <label asp-for="Recordarme">
+                        <input asp-for="Recordarme" />
+                        @Html.DisplayNameFor(m => m.Recordarme)
+                    </label>
+                </div>
+            </div>
             <br>
             <button type="submit" class="btn btn-outline-primary">Ingresar</button>
         </form>

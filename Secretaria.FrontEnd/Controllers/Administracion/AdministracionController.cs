@@ -181,7 +181,10 @@ namespace Secretaria.FrontEnd.Controllers.Administracion
             {
                 Id = role.Id,
                 NombreRol = role.Name,
-                Area = role.Area
+                Area = role.Area,
+                CreatedBy = role.CreatedBy,
+                CreationDate = role.CreationDate.ToString(),
+                CreationIp = role.CreationIp,
             };
 
             // Retrieve all the Users
@@ -258,6 +261,9 @@ namespace Secretaria.FrontEnd.Controllers.Administracion
                 Email = user.Email,
                 UserName = user.UserName,
                 NombreCompleto = user.NombreCompleto,
+                CreatedBy = user.CreatedBy,
+                CreationDate = user.CreationDate.ToString(),
+                CreationIp = user.CreationIp,
                 Claims = userClaims.Select(c => c.Value).ToList(),
                 Roles = userRoles
             };
@@ -385,7 +391,9 @@ namespace Secretaria.FrontEnd.Controllers.Administracion
 
             var model = new List<EditarUsuarioEnRol>();
 
-            foreach (var user in userManager.Users)
+            var users = userManager.Users.ToList();
+
+            foreach (var user in users)
             {
                 var userRoleViewModel = new EditarUsuarioEnRol
                 {

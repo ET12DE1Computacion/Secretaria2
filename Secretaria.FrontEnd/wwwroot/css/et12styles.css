@@ -1,0 +1,8 @@
+﻿.et12-borde {
+    border:solid;
+    border-style:solid;
+    border-radius: 6px;
+    border-width:thin;
+    border-color:lightgray;
+    padding: 1.25rem;
+}

@@ -22,6 +22,9 @@ namespace Secretaria.FrontEnd.ViewModels.Administracion
         [Required]
         [EmailAddress]
         public string Email { get; set; }
+        public string CreatedBy { get; set; }
+        public string CreationDate { get; set; }
+        public string CreationIp { get; set; }
 
         public List<string> Claims { get; set; }
 
