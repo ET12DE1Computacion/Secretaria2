@@ -9,8 +9,8 @@ using Secretaria.FrontEnd.Identity;
 namespace Secretaria.FrontEnd.Migrations.ApplicationDb
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20200425142328_InitialUsersDatabase")]
-    partial class InitialUsersDatabase
+    [Migration("20200427021432_InitialSecretariaUsuarios")]
+    partial class InitialSecretariaUsuarios
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -280,6 +280,9 @@ namespace Secretaria.FrontEnd.Migrations.ApplicationDb
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
 
                     b.Property<string>("NombreCompleto")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.Property<string>("PathImagen")
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
 
                     b.HasDiscriminator().HasValue("ApplicationUser");

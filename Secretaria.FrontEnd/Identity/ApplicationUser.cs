@@ -7,6 +7,7 @@ namespace Secretaria.FrontEnd.Identity
     {
         public string NombreCompleto { get; set; }
         public bool Habilitado { get; set; }
+        public string PathImagen { get; set; }
         public string CreatedBy { get; set; }
         public DateTime CreationDate { get; set; }
         public string CreationIp { get; set; }

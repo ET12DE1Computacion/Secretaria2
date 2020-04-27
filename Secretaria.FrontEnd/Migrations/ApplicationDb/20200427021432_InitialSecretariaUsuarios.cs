@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Secretaria.FrontEnd.Migrations.ApplicationDb
 {
-    public partial class InitialUsersDatabase : Migration
+    public partial class InitialSecretariaUsuarios : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -53,6 +53,7 @@ namespace Secretaria.FrontEnd.Migrations.ApplicationDb
                     Discriminator = table.Column<string>(nullable: false),
                     NombreCompleto = table.Column<string>(nullable: true),
                     Habilitado = table.Column<int>(nullable: true),
+                    PathImagen = table.Column<string>(nullable: true),
                     CreatedBy = table.Column<string>(nullable: true),
                     CreationDate = table.Column<DateTime>(nullable: true),
                     CreationIp = table.Column<string>(nullable: true),

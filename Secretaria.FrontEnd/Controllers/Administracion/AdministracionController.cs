@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -22,12 +24,20 @@ namespace Secretaria.FrontEnd.Controllers.Administracion
         
         private readonly ILogger<AdministracionController> logger;
 
-        public AdministracionController(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager, RoleManager<ApplicationRole> roleManager, ILogger<AdministracionController> logger)
+        private readonly IWebHostEnvironment webHostEnvironment;
+
+        public AdministracionController(
+            UserManager<ApplicationUser> userManager, 
+            SignInManager<ApplicationUser> signInManager, 
+            RoleManager<ApplicationRole> roleManager, 
+            ILogger<AdministracionController> logger,
+            IWebHostEnvironment webHostEnvironment)
         {
             this.userManager = userManager;
             this.signInManager = signInManager;
             this.roleManager = roleManager;
             this.logger = logger;
+            this.webHostEnvironment = webHostEnvironment;
         }
 
         [HttpGet]
@@ -42,6 +52,19 @@ namespace Secretaria.FrontEnd.Controllers.Administracion
         {
             if (ModelState.IsValid)
             {
+                string uniqueFileName = null;
+
+                if (model.Imagen != null)
+                {
+                    string uploadsFolder = Path.Combine(webHostEnvironment.WebRootPath, "Images");
+                    
+                    uniqueFileName = Guid.NewGuid().ToString() + "_" + model.Imagen.FileName;
+                    
+                    string filePath = Path.Combine(uploadsFolder, uniqueFileName);
+                    
+                    model.Imagen.CopyTo(new FileStream(filePath, FileMode.Create));
+                }
+
                 var user = new ApplicationUser { 
                     UserName = model.Email, 
                     Email = model.Email, 
@@ -52,7 +75,8 @@ namespace Secretaria.FrontEnd.Controllers.Administracion
                     LastUpdatedBy = HttpContext.User.Identity.Name,
                     LastUpdatedDate = DateTime.Now,
                     LastUpdatedIp = HttpContext.Connection.RemoteIpAddress.ToString(),
-                    Habilitado = true 
+                    Habilitado = true,
+                    PathImagen = uniqueFileName
                 };
 
                 var result = await userManager.CreateAsync(user, model.Contrasenia);
@@ -264,6 +288,7 @@ namespace Secretaria.FrontEnd.Controllers.Administracion
                 CreatedBy = user.CreatedBy,
                 CreationDate = user.CreationDate.ToString(),
                 CreationIp = user.CreationIp,
+                PathImagen = user.PathImagen,
                 Claims = userClaims.Select(c => c.Value).ToList(),
                 Roles = userRoles
             };

@@ -280,6 +280,9 @@ namespace Secretaria.FrontEnd.Migrations.ApplicationDb
                     b.Property<string>("NombreCompleto")
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
 
+                    b.Property<string>("PathImagen")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
                     b.HasDiscriminator().HasValue("ApplicationUser");
                 });
 

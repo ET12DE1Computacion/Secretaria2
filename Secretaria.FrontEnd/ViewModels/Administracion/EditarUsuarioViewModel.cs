@@ -25,6 +25,7 @@ namespace Secretaria.FrontEnd.ViewModels.Administracion
         public string CreatedBy { get; set; }
         public string CreationDate { get; set; }
         public string CreationIp { get; set; }
+        public string PathImagen { get; set; }
 
         public List<string> Claims { get; set; }
 

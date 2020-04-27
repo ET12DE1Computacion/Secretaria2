@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Microsoft.AspNetCore.Http;
+using System.ComponentModel.DataAnnotations;
 
 namespace Secretaria.FrontEnd.ViewModels.Administracion
 {
@@ -19,5 +20,7 @@ namespace Secretaria.FrontEnd.ViewModels.Administracion
         [Display(Name = "Confirmar Contraseña")]
         [Compare("Contrasenia", ErrorMessage = "La contraseña y la contraseña de confirmación no coinciden")]
         public string ConfirmarContrasenia { get; set; }
+
+        public IFormFile Imagen { get; set; }
     }
 }
