@@ -11,6 +11,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Secretaria.Domain.ADO;
 using Secretaria.FrontEnd.Identity;
+using Secretaria.Repository.V2;
 
 namespace Secretaria.FrontEnd
 {
@@ -42,6 +43,9 @@ namespace Secretaria.FrontEnd
                 options.Password.RequireNonAlphanumeric = false;
                 options.Password.RequireUppercase = false;
             });
+
+            //Con esto se inicializa el unit of work
+            services.AddTransient<IUnitOfWork, UnitOfWork>();
 
             services.ConfigureApplicationCookie(options => options.LoginPath = "/Administracion/Login");
 
